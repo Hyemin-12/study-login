@@ -12,7 +12,7 @@ a {
     color: black;
 }
 
-.container {
+form {
     margin-top: 200px;
     display: flex;
     flex-direction: column;

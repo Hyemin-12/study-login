@@ -17,6 +17,14 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 10px;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     row-gap: 20px;
 }
 
@@ -62,6 +70,7 @@ input:focus {
 }
 
 button {
+    margin-top: 20px;
     width: 200px;
     height: 50px;
     border-radius: 10px;
@@ -75,4 +84,12 @@ button {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+p {margin-top: -5px;
+    font-size: 0.8rem;
+}
+
+p:hover {
+    font-weight: bold;
 }
