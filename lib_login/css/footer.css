@@ -1,0 +1,64 @@
+/* FOOTER  CSS */
+.footer {
+    width: 100%;
+    background-color: #B68A34;
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .contain {
+    display: flex;
+    justify-content: space-evenly;  
+    padding: 10px
+  }
+  
+  .footer .col {
+    align-items: center;
+    float: left;
+    column-gap: 40px; 
+  }
+  
+  .footer .col .social {
+    float: left;
+  }
+
+  .footer .col ul {
+    list-style-type: none;
+  }
+  
+  .footer .col ul li {
+    color: #fff;
+    font-size: 0.97vw;
+    padding: 6px 0px 6px 0px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+  }
+  
+  .social ul li {
+    display: inline-block;
+  }
+   
+  .footer i::before {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .footer .col ul li:hover {
+    color: darkslategray;
+    transition: 0.1s;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
+  }
+  
+  .social ul li img :hover {
+    color: #fff;
+    transition: 0.1s;
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
+  }
+  
+  .clearfix {
+    clear: both;
+  }

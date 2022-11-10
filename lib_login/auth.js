@@ -1,30 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
-var template = require('./template.js');
 var db = require('./db');
 
 // 로그인 화면
 router.get('/login', function (request, response) {
-    var title = '로그인';
-    var html = template.HTML(title,`
-            <h2>로그인</h2>
-            <form action="/auth/login_process" method="post">
-            <p><input class="login" type="text" name="username" placeholder="아이디"></p>
-            <p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>
-            <p><input class="btn" type="submit" value="로그인"></p>
-            </form>            
-            <p>계정이 없으신가요?  <a href="/auth/register">회원가입</a></p> 
-        `, '');
-    response.send(html);
+    response.sendFile(__dirname + '/login.html')
 });
 
 // 로그인 프로세스
 router.post('/login_process', function (request, response) {
-    var username = request.body.username;
-    var password = request.body.pwd;
+    var username = request.body.id;
+    var password = request.body.pw;
     if (username && password) {             // id와 pw가 입력되었는지 확인
-        
         db.query('SELECT * FROM userTable WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             if (error) throw error;
             if (results.length > 0) {       // db에서의 반환값이 있으면 로그인 성공
@@ -36,44 +24,33 @@ router.post('/login_process', function (request, response) {
             } else {              
                 response.send(`<script type="text/javascript">alert("로그인 정보가 일치하지 않습니다."); 
                 document.location.href="/auth/login";</script>`);    
-            }            
+            }
         });
 
     } else {
         response.send(`<script type="text/javascript">alert("아이디와 비밀번호를 입력하세요!"); 
-        document.location.href="/auth/login";</script>`);    
+        window.location.href="/auth/login";</script>`);    
     }
 });
 
 // 로그아웃
 router.get('/logout', function (request, response) {
     request.session.destroy(function (err) {
-        response.redirect('/');
+        response.redirect('/auth/login');
     });
 });
 
 
 // 회원가입 화면
 router.get('/register', function(request, response) {
-    var title = '회원가입';    
-    var html = template.HTML(title, `
-    <h2>회원가입</h2>
-    <form action="/auth/register_process" method="post">
-    <p><input class="login" type="text" name="username" placeholder="아이디"></p>
-    <p><input class="login" type="password" name="pwd" placeholder="비밀번호"></p>    
-    <p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인"></p>
-    <p><input class="btn" type="submit" value="제출"></p>
-    </form>            
-    <p><a href="/auth/login">로그인화면으로 돌아가기</a></p>
-    `, '');
-    response.send(html);
+    response.sendFile(__dirname + '/signup.html');
 });
  
 // 회원가입 프로세스
 router.post('/register_process', function(request, response) {    
-    var username = request.body.username;
-    var password = request.body.pwd;    
-    var password2 = request.body.pwd2;
+    var username = request.body.id;
+    var password = request.body.pw;    
+    var password2 = request.body.pw_check;
 
     if (username && password && password2) {
         
